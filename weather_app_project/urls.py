@@ -14,10 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from rest_api.views import WeatherListApi 
+from django.urls import path, re_path
+from rest_api.views import WeatherListApi, WeatherByIdView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('weather/', WeatherListApi.as_view(), name = 'list_weathers'),
+    re_path('^weather/(?P<pk>.+)/$', WeatherByIdView.as_view()),
+
 ]
